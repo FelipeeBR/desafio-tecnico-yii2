@@ -16,6 +16,12 @@ class m250910_045905_create_categories_table extends Migration
             'id' => $this->primaryKey(),
             'name' => $this->string(45)->notNull()->unique(),
         ]);
+
+        $this->batchInsert('{{%categories}}', ['name'], [
+            ['Alimentação'],
+            ['Transporte'],
+            ['Lazer'],
+        ]);
     }
 
     /**

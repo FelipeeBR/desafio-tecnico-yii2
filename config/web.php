@@ -55,6 +55,11 @@ $config = [
                     'controller' => ['api/user'],
                     'pluralize' => false,
                 ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => ['api/category'],
+                    'pluralize' => false,
+                ],
                 'POST api/auth/login' => 'api/auth/login',
             ],
         ],
