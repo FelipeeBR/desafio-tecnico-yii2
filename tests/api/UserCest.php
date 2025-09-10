@@ -28,6 +28,23 @@ class UserCest
         ]);
     }
 
+    /*public function createUserTest(ApiTester $I)
+    {
+        $I->wantTo('criar um usuário de test');
+
+        $I->sendPOST('/api/user', [
+            'name' => 'johndoe',
+            'email' => 'example@email.com',
+            'password' => 'secret123'
+        ]);
+
+        $I->seeResponseCodeIs(201);
+        $I->seeResponseIsJson();
+        $I->seeResponseContainsJson([
+            'success' => true,
+        ]);
+    }*/
+
     public function createUserWithEmptyEmail(ApiTester $I)
     {
         $I->wantTo('tentar criar um usuário com email vazio e receber erro de validação');
