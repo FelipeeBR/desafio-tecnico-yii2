@@ -6,6 +6,13 @@ class UserCest
     {
         $I->haveHttpHeader('Content-Type', 'application/json');
         $I->haveHttpHeader('Accept', 'application/json');
+
+        // Cria um usuário para testes
+        $I->sendPOST('/api/user', [
+            'name' => 'johndoe',
+            'email' => 'example@email.com',
+            'password' => 'secret123'
+        ]);
     }
 
     public function createUserSuccessfully(ApiTester $I)
@@ -27,23 +34,6 @@ class UserCest
             'success' => true,
         ]);
     }
-
-    /*public function createUserTest(ApiTester $I)
-    {
-        $I->wantTo('criar um usuário de test');
-
-        $I->sendPOST('/api/user', [
-            'name' => 'johndoe',
-            'email' => 'example@email.com',
-            'password' => 'secret123'
-        ]);
-
-        $I->seeResponseCodeIs(201);
-        $I->seeResponseIsJson();
-        $I->seeResponseContainsJson([
-            'success' => true,
-        ]);
-    }*/
 
     public function createUserWithEmptyEmail(ApiTester $I)
     {

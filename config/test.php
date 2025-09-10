@@ -26,7 +26,9 @@ return [
             'basePath' => __DIR__ . '/../web/assets',
         ],
         'user' => [
-            'identityClass' => 'app\modules\api\models\User',
+            'identityClass' => 'app\modules\api\services\UserIdentityService',
+            'enableAutoLogin' => false,
+            'enableSession' => false,
         ],
         'request' => [
             'cookieValidationKey' => 'test',
@@ -50,6 +52,18 @@ return [
                 [
                     'class' => 'yii\rest\UrlRule',
                     'controller' => 'api/user',
+                    'pluralize' => false,
+                    'extraPatterns' => [
+                        'POST' => 'create',
+                        'GET {id}' => 'view',
+                        'PUT {id}' => 'update',
+                        'DELETE {id}' => 'delete',
+                        'GET' => 'index',
+                    ],
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'api/expense',
                     'pluralize' => false,
                     'extraPatterns' => [
                         'POST' => 'create',

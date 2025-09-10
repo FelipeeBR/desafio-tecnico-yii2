@@ -42,6 +42,8 @@ class Expense extends ActiveRecord implements Linkable
             [['date'], 'date', 'format' => 'php:Y-m-d'],
             [['description'], 'string', 'max' => 255, 'message' => '{attribute} nao pode ter mais de 255 caracteres.'],
             [['description'], 'required', 'message' => '{attribute} nao pode ficar em branco.'],
+            [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['category_id' => 'id'], 'message' => 'Categoria nao encontrada.'],
+            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id'], 'message' => 'Usuario nao encontrado.'],
         ];
     }
 
