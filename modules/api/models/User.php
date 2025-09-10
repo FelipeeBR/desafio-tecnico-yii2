@@ -5,6 +5,9 @@ namespace app\modules\api\models;
 use app\modules\api\services\PasswordHasherInterface;
 use Yii;
 use yii\db\ActiveRecord;
+use yii\helpers\Url;
+use yii\web\Link;
+use yii\web\Linkable;
 
 /**
  * This is the model class for table "users".
@@ -17,7 +20,7 @@ use yii\db\ActiveRecord;
  * @property string $access_token
  */
 
-class User extends ActiveRecord
+class User extends ActiveRecord implements Linkable
 {
     private static $passwordHasher;
 
@@ -110,5 +113,13 @@ class User extends ActiveRecord
     public function generateAccessToken(): void
     {
         $this->access_token = Yii::$app->security->generateRandomString();
+    }
+
+    public function getLinks(): array {
+        return [
+            Link::REL_SELF => Url::to(['/api/user/view', 'id' => $this->id], true),
+            'update' => Url::to(['/api/user/update', 'id' => $this->id], true),
+            'delete' => Url::to(['/api/user/delete', 'id' => $this->id], true),
+        ];
     }
 }

@@ -7,10 +7,16 @@ use yii\rest\ActiveController;
 use app\modules\api\models\User;
 use app\modules\api\services\PasswordHasherService;
 use app\modules\api\services\UserService;
+use yii\data\ActiveDataProvider;
 
 class UserController extends ActiveController
 {
     public $modelClass = User::class;
+
+    public $serializer = [
+        'class' => 'yii\rest\Serializer',
+        'collectionEnvelope' => 'items',
+    ];
     
     public function init() {
         parent::init();
@@ -36,6 +42,7 @@ class UserController extends ActiveController
             return [
                 'success' => true,
                 'data' => $result['user'],
+                '_links' => $result['user']->getLinks(),
             ];
         }
 
@@ -44,5 +51,14 @@ class UserController extends ActiveController
             'success' => false,
             'errors' => $result['errors'],
         ];
+    }
+
+    public function actionIndex() {
+        $dataProvider = new ActiveDataProvider([
+            'query' => User::find(),
+            'pagination' => ['pageSize' => 10],
+        ]);
+
+        return $dataProvider->getModels();
     }
 }
