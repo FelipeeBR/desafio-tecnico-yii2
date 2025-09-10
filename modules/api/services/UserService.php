@@ -12,7 +12,6 @@ class UserService
         $user->load($data, '');
 
         if($user->validate()) {
-            
             if($user->save()) {
                 return [
                     'success' => true,

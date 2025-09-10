@@ -58,7 +58,7 @@ class UserController extends ActiveController
         $data = Yii::$app->request->getBodyParams();
         $result = Yii::$container->get(UserService::class)->createUser($data);
 
-        if ($result['success']) {
+        if($result['success']) {
             Yii::$app->response->setStatusCode(201);
             return [
                 'success' => true,
