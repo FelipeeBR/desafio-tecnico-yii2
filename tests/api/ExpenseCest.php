@@ -8,6 +8,12 @@ class ExpenseCest
         $I->haveHttpHeader('Content-Type', 'application/json');
         $I->haveHttpHeader('Accept', 'application/json');
 
+        $I->sendPOST('/api/user', [
+            'name' => 'johndoe',
+            'email' => 'example@email.com',
+            'password' => 'secret123'
+        ]);
+
         $I->login('example@email.com', 'secret123');
     }
 
