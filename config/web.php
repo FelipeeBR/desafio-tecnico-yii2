@@ -54,6 +54,7 @@ $config = [
                     'controller' => ['api/user'],
                     'pluralize' => false,
                 ],
+                'POST api/auth/login' => 'api/auth/login',
             ],
         ],
     ],
