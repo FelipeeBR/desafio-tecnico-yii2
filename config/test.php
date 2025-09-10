@@ -25,11 +25,8 @@ return [
         'assetManager' => [
             'basePath' => __DIR__ . '/../web/assets',
         ],
-        'urlManager' => [
-            'showScriptName' => true,
-        ],
         'user' => [
-            'identityClass' => 'app\models\User',
+            'identityClass' => 'app\modules\api\models\User',
         ],
         'request' => [
             'cookieValidationKey' => 'test',
@@ -40,7 +37,35 @@ return [
                 'domain' => 'localhost',
             ],
             */
+            'parsers' => [
+                'application/json' => 'yii\web\JsonParser',
+            ],
+        ],
+        'urlManager' => [
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+            'rules' => [
+                'POST api/user' => 'api/user/create',
+                'POST api/auth/login' => 'api/auth/login',
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'api/user',
+                    'pluralize' => false,
+                    'extraPatterns' => [
+                        'POST' => 'create',
+                        'GET {id}' => 'view',
+                        'PUT {id}' => 'update',
+                        'DELETE {id}' => 'delete',
+                        'GET' => 'index',
+                    ],
+                ],
+            ],
         ],
     ],
     'params' => $params,
+    'modules' => [
+        'api' => [
+            'class' => 'app\modules\api\Module',
+        ],
+    ],
 ];

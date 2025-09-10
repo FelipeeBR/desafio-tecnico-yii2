@@ -1,0 +1,22 @@
+# actor: ApiTester
+# modules:
+#     enabled:
+#         - REST:
+#             url: http://localhost:8888/index-test.php/
+#             depends: PhpBrowser
+#         - Yii2:
+#             configFile: "config/test.php"
+#             entryScript: "index-test.php"
+#             part: [orm, fixtures]
+#             cleanup: false
+#             transaction: false
+#         - \Helper\Api 
+
+actor: ApiTester
+modules:
+    enabled:
+        - PhpBrowser:
+            url: 'http://localhost:8888/index-test.php/'
+        - REST:
+            depends: PhpBrowser
+        - \Helper\Api
