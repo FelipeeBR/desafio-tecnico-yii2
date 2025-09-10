@@ -45,7 +45,7 @@ o usuario ter um perfil, seria mais facil preencher algumas informações para o
 - Decisão: Antes para encriptar a senha do usuario, era tratado diretamente na entidade User chamando o método setPassword. Foi tirado essa reponsabilidade da entidade User.
 O User requisita o serviço de encriptar a senha ao inves de fazer esse serviço. No caso o PasswordHasherService vai fazer isso.
 
-#### Desativa CRUD padrão de Despesas (Expense):
+#### Desativar CRUD padrão de Despesas (Expense):
 ```
 public function actions() {
   $actions = parent::actions();
@@ -54,4 +54,24 @@ public function actions() {
   return $actions;
 }
 ```
-- Decisão: 
+- Decisão: Foi desativado a maneira padrão de CRUD de despesas para tratar melhor as validações, como:
+  - ActionIndex: Consegue filtrar as depesas com searchModel, como tambem a maneira do usuario visualizar somente suas despesas.
+  - ActionCreate: Para criar uma despesa precisa do id do usuario autenticado.
+  - ActionUpdate: Para atualizar dados de uma despesa precisa do id do usuario autenticado.
+  - ActionDelete: Só permite deleções de despesas do usuario autenticado.
+  - ActionView: Visualiza detalhes de despesas do usuario autenticado.  
+
+#### Links:
+```
+public function getLinks(): array {
+  return [
+      Link::REL_SELF => Url::to(['/api/expense/view', 'id' => $this->id], true),
+      'update' => Url::to(['/api/expense/update', 'id' => $this->id], true),
+      'delete' => Url::to(['/api/expense/delete', 'id' => $this->id], true),
+  ];
+}
+```
+- Decisão: Para saber quais ações da entidade User/Expense estão disponiveis (view, update, delete), foi implementado
+o método getLinks() para uma melhor interação com a API, que é um principio de Restful.
+
+### Testes
