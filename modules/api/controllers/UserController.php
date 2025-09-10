@@ -8,6 +8,8 @@ use app\modules\api\models\User;
 use app\modules\api\services\PasswordHasherService;
 use app\modules\api\services\UserService;
 use yii\data\ActiveDataProvider;
+use yii\filters\auth\HttpBearerAuth;
+use yii\filters\VerbFilter;
 
 class UserController extends ActiveController
 {
@@ -24,6 +26,25 @@ class UserController extends ActiveController
         
         $passwordHasher = new PasswordHasherService();
         User::setPasswordHasher($passwordHasher);
+    }
+
+    public function behaviors() {
+        $behaviors = parent::behaviors();
+
+        $behaviors['authenticator'] = [
+            'class' => HttpBearerAuth::class,
+            'except' => ['create'],
+        ];
+
+        $behaviors['verbs'] = [
+            'class' => VerbFilter::class,
+            'actions' => [
+                'update' => ['PUT', 'PATCH'],
+                'delete' => ['DELETE'],
+            ],
+        ];
+
+        return $behaviors;
     }
 
     public function actions() {
