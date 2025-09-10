@@ -2,6 +2,7 @@
 
 namespace app\modules\api\controllers;
 
+use app\modules\api\models\ExpenseSearch;
 use app\modules\api\services\ExpenseService;
 use Yii;
 use yii\data\ActiveDataProvider;
@@ -45,14 +46,8 @@ class ExpenseController extends ActiveController
     }
 
     public function actionIndex() {
-        $userId = Yii::$app->user->id;
-
-        return new ActiveDataProvider([
-            'query' => $this->modelClass::find()->where(['user_id' => $userId]),
-            'pagination' => [
-                'pageSize' => 20,
-            ],
-        ]);
+        $searchModel = new ExpenseSearch();
+        return $searchModel->search(Yii::$app->request->queryParams);
     }
 
     public function actionCreate() {
