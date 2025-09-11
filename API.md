@@ -547,14 +547,25 @@ Esta API permite gerenciar despesas.
 *   **URL:** `http://localhost:8888/api/category`
 ```json
 {
-    "name": "Moradia"
+    "name": "Cartão"
 }
 ```
 
 **Exemplo de Resposta (201 Created)**
 ```json
 {
-    "name": "Moradia",
-    "id": 4
+    "name": "Cartão",
+    "id": 5,
+    "_links": {
+        "self": {
+            "href": "http://localhost:8888/api/category/5"
+        },
+        "update": {
+            "href": "http://localhost:8888/api/category/5"
+        },
+        "delete": {
+            "href": "http://localhost:8888/api/category/5"
+        }
+    }
 }
 ```
