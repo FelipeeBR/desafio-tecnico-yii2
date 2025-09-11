@@ -9,17 +9,21 @@ API RESTful utilizando Yii2 para gerenciar despesas pessoais. O sistema permitir
    git clone https://github.com/FelipeeBR/desafio-tecnico-yii2
    cd desafio-tecnico-yii2
    ```
-2. Criar os serviços no Docker
+2. Conferir se precisar instalar dependencias:
+   ```
+   composer install
+   ```
+3. Criar os serviços no Docker
    ```
    docker compose up -d
    ```
    Aguarde a instalação dos serviços
    
-3. Depois disso, execute o comando de migrate dentro do container PHP
+4. Depois disso, execute o comando de migrate dentro do container PHP
    ```
    docker-compose exec php php yii migrate
    ```
-4. Se tudo ocorreu bem, a aplicação já está disponivel.
+5. Se tudo ocorreu bem, a aplicação já está disponivel.
 
 ### Decisões Tecnicas
 #### Separação de responsabilidades:
