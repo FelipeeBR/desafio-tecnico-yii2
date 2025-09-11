@@ -6,6 +6,12 @@ class AuthCest
     {
         $I->haveHttpHeader('Content-Type', 'application/json');
         $I->haveHttpHeader('Accept', 'application/json');
+        // Cria um usuário para testes
+        $I->sendPOST('/api/user', [
+            'name' => 'johndoe',
+            'email' => 'example@email.com',
+            'password' => 'secret123'
+        ]);
     }
 
     public function loginSuccessfully(ApiTester $I)
