@@ -59,8 +59,7 @@ class ExpenseController extends ActiveController
             Yii::$app->response->setStatusCode(201);
             return [
                 'success' => true,
-                'expense' => $result['expense'],
-                '_links' => $result['expense']->getLinks(),
+                'data' => $result['expense'],
             ];
         }
         Yii::$app->response->setStatusCode(422);
@@ -79,8 +78,7 @@ class ExpenseController extends ActiveController
             Yii::$app->response->setStatusCode(200);
             return [
                 'success' => true,
-                'expense' => $result['expense'],
-                '_links' => $result['expense']->getLinks(),
+                'data' => $result['expense'],
             ];
         }
         Yii::$app->response->setStatusCode(422);
@@ -113,8 +111,7 @@ class ExpenseController extends ActiveController
             Yii::$app->response->setStatusCode(200);
             return [
                 'success' => true,
-                'expense' => $expense,
-                '_links' => $expense->getLinks(),
+                'data' => $expense,
             ];
         }
         Yii::$app->response->setStatusCode(404);

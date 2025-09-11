@@ -2,7 +2,10 @@
 
 namespace app\modules\api\models;
 
-use Yii;
+use yii\db\ActiveRecord;
+use yii\web\Link;
+use yii\web\Linkable;
+use yii\helpers\Url;
 
 /**
  * This is the model class for table "categories".
@@ -11,7 +14,7 @@ use Yii;
  * @property string $name
  * @property string $description
  */
-class Category extends \yii\db\ActiveRecord
+class Category extends ActiveRecord implements Linkable
 {
     /**
      * {@inheritdoc}
@@ -41,6 +44,15 @@ class Category extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'name' => 'Name',
+        ];
+    }
+
+    public function getLinks(): array
+    {
+        return [
+            Link::REL_SELF => Url::to(['/api/category/view', 'id' => $this->id], true),
+            'update' => Url::to(['/api/category/update', 'id' => $this->id], true),
+            'delete' => Url::to(['/api/category/delete', 'id' => $this->id], true),
         ];
     }
 }

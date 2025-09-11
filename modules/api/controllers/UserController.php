@@ -63,7 +63,6 @@ class UserController extends ActiveController
             return [
                 'success' => true,
                 'data' => $result['user'],
-                '_links' => $result['user']->getLinks(),
             ];
         }
 
