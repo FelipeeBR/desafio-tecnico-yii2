@@ -82,19 +82,19 @@ o método getLinks() para uma melhor interação com a API, que é um principio 
 
 1. Fazer o build com:
    ```
-   php vendor/bin/codecept build
+   docker exec -it app_gerencia php vendor/bin/codecept build
    ```
    obs: esse projeto não está configurado banco de dados para testes, está sendo no DB principal.
    
 2. Execute comandos para teste API:
    ```
-   php vendor/bin/codecept run api UserCest
+   docker exec -it app_gerencia php vendor/bin/codecept run api UserCest
    ```
    ```
-   php vendor/bin/codecept run api AuthCest
+   docker exec -it app_gerencia php vendor/bin/codecept run api AuthCest
    ```
    ```
-   php vendor/bin/codecept run api ExpenseCest
+   docker exec -it app_gerencia php vendor/bin/codecept run api ExpenseCest
    ```
 
 ## Especificações de API: <a href="https://github.com/FelipeeBR/desafio-tecnico-yii2/blob/main/API.md">API.md</a>
