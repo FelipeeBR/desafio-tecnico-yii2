@@ -78,6 +78,9 @@ public function getLinks(): array {
 - Decisão: Para saber quais ações da entidade User/Expense estão disponiveis (view, update, delete), foi implementado
 o método getLinks() para uma melhor interação com a API, que é um principio de Restful.
 
+#### Modulo api
+- Decisão: Tudo que for relacionado a api ficará no modules/api, e com o modulo tras mais facilidade e organização em novas implementações e testes.
+
 ### Testes
 
 1. Fazer o build com:
