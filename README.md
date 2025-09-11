@@ -9,17 +9,21 @@ API RESTful utilizando Yii2 para gerenciar despesas pessoais. O sistema permitir
    git clone https://github.com/FelipeeBR/desafio-tecnico-yii2
    cd desafio-tecnico-yii2
    ```
-2. Criar os serviços no Docker
+2. Conferir se precisar instalar dependencias:
+   ```
+   composer install
+   ```
+3. Criar os serviços no Docker
    ```
    docker compose up -d
    ```
    Aguarde a instalação dos serviços
    
-3. Depois disso, execute o comando de migrate dentro do container PHP
+4. Depois disso, execute o comando de migrate dentro do container PHP
    ```
    docker-compose exec php php yii migrate
    ```
-4. Se tudo ocorreu bem, a aplicação já está disponivel.
+5. Se tudo ocorreu bem, a aplicação já está disponivel.
 
 ### Decisões Tecnicas
 #### Separação de responsabilidades:
@@ -75,3 +79,22 @@ public function getLinks(): array {
 o método getLinks() para uma melhor interação com a API, que é um principio de Restful.
 
 ### Testes
+
+1. Fazer o build com:
+   ```
+   php vendor/bin/codecept build
+   ```
+   obs: esse projeto não está configurado banco de dados para testes, está sendo no DB principal.
+   
+2. Execute comandos para teste API:
+   ```
+   php vendor/bin/codecept run api UserCest
+   ```
+   ```
+   php vendor/bin/codecept run api AuthCest
+   ```
+   ```
+   php vendor/bin/codecept run api ExpenseCest
+   ```
+
+## Especificações de API: <a href="https://github.com/FelipeeBR/desafio-tecnico-yii2/blob/main/API.md">API.md</a>
