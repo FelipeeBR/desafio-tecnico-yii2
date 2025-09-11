@@ -10,6 +10,13 @@ Esta API permite gerenciar despesas.
 
 **Exemplo de Requisição**
 *   **URL:** `http://localhost:8888/api/user`
+```json
+{
+    "name": "John Doe",
+    "email": "test@example.com",
+    "password": "password"
+}
+```
 
 **Exemplo de Resposta (201 Created)**
 ```json
@@ -43,6 +50,13 @@ Esta API permite gerenciar despesas.
 
 **Exemplo de Requisição**
 *   **URL:** `http://localhost:8888/api/user/3`
+```json
+{
+    "name": "User Alterado",
+    "email": "test@example.com",
+    "password": "password"
+}
+```
 
 **Exemplo de Resposta (200 OK)**
 ```json
@@ -84,6 +98,12 @@ Esta API permite gerenciar despesas.
 
 **Exemplo de Requisição**
 *   **URL:** `http://localhost:8888/api/auth/login`
+```json
+{
+    "email": "test@example.com",
+    "password": "password"
+}
+```
 
 **Exemplo de Resposta (200 OK)**
 ```json
@@ -111,6 +131,15 @@ Esta API permite gerenciar despesas.
 
 **Exemplo de Requisição**
 *   **URL:** `http://localhost:8888/api/expense`
+```json
+{
+    "user_id": 3,
+    "category_id": 2,
+    "description": "Test",
+    "amount": 499.50,
+    "date": "2025-09-10"
+}
+```
 
 **Exemplo de Resposta (201 Created)**
 ```json
@@ -146,6 +175,15 @@ Esta API permite gerenciar despesas.
 
 **Exemplo de Requisição**
 *   **URL:** `http://localhost:8888/api/expense/6`
+```json
+{
+    "user_id": 3,
+    "category_id": 1,
+    "description": "Test Atualizado",
+    "amount": 999,
+    "date": "2025-09-10"
+}
+```
 
 **Exemplo de Resposta (200 OK)**
 ```json
