@@ -9,32 +9,55 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_DATABASE: db_gerencia
+          MYSQL_USER: admin
+          MYSQL_PASSWORD: admin123
+        options: >-
+          --health-cmd="mysqladmin ping -h localhost -u root -ppassword"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+
     steps:
       - name: Checkout código
         uses: actions/checkout@v4
 
-      - name: Configurar Docker Buildx
-        uses: docker/setup-buildx-action@v3
+      - name: Configurar PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+          extensions: mbstring, pdo, pdo_mysql, xml
 
-      - name: Build containers
-        run: docker compose -f docker-compose.yml build
+      - name: Instalar dependências
+        run: composer install --prefer-dist --no-interaction --no-progress
 
-      - name: Subir containers
-        run: docker compose -f docker-compose.yml up -d php db
+      - name: Configurar ambiente de teste
+        run: |
+          cp .env.test .env
+          # Ou configure as variáveis de ambiente manualmente
+          echo "DB_DSN=mysql:host=127.0.0.1;port=3306;dbname=db_gerencia" >> .env
+          echo "DB_USERNAME=admin" >> .env
+          echo "DB_PASSWORD=admin123" >> .env
 
-      - name: Instalar dependências PHP
-        run: docker compose exec -T php composer install --prefer-dist --no-interaction --no-progress
-
-      - name: Aguardar DB
+      - name: Aguardar MySQL ficar disponível
         run: |
           for i in {1..30}; do
-            docker compose exec -T db mysqladmin ping -h localhost -uadmin -padmin123 && break
-            echo "Aguardando DB..."
+            if mysqladmin ping -h 127.0.0.1 -u admin -padmin123 --silent; then
+              echo "MySQL está pronto"
+              break
+            fi
+            echo "Aguardando MySQL... ($i/30)"
             sleep 2
           done
-          
+
       - name: Rodar migrations
-        run: docker compose exec -T php php yii migrate --interactive=0
+        run: php yii migrate --interactive=0
 
       - name: Rodar testes Codeception
-        run: docker compose exec -T php vendor/bin/codecept run
+        run: vendor/bin/codecept run
