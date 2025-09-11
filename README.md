@@ -96,3 +96,5 @@ o método getLinks() para uma melhor interação com a API, que é um principio 
    ```
    php vendor/bin/codecept run api ExpenseCest
    ```
+
+## Especificações de API: <a href="https://github.com/FelipeeBR/desafio-tecnico-yii2/blob/main/API.md">API.md</a>
