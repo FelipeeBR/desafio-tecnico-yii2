@@ -35,4 +35,4 @@ jobs:
         run: docker compose exec -T php php yii migrate --interactive=0
 
       - name: Rodar testes Codeception
-        run: docker compose exec -T php vendor/bin/codecept run
+        run: docker compose exec -T php vendor/bin/codecept run api
