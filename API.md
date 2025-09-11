@@ -35,11 +35,52 @@ Esta API permite gerenciar despesas.
 }
 ```
 
+## Endpoint de Editar Usuários
+
+*   **Endpoint:** `/api/user/{id}`
+*   **Método:** `PUT`
+*   **Descrição:** Edita um usuário.
+
+**Exemplo de Requisição**
+*   **URL:** `http://localhost:8888/api/user/3`
+
+**Exemplo de Resposta (200 OK)**
+```json
+{
+    "id": 3,
+    "name": "User Alterado",
+    "email": "test@example.com",
+    "access_token": "ZASV9tZoGYz5350wST2-bxWHUVutPBL6",
+    "_links": {
+        "self": {
+            "href": "http://localhost:8888/api/user/3"
+        },
+        "update": {
+            "href": "http://localhost:8888/api/user/3"
+        },
+        "delete": {
+            "href": "http://localhost:8888/api/user/3"
+        }
+    }
+}
+```
+
+## Endpoint de Deletar Usuários
+
+*   **Endpoint:** `/api/user/{id}`
+*   **Método:** `DELETE`
+*   **Descrição:** Deleta um usuário.
+
+**Exemplo de Requisição**
+*   **URL:** `http://localhost:8888/api/user/3`
+
+**Exemplo de Resposta (204 No Content)**
+
 ## Endpoint de Autenticação de Usuários
 
 *   **Endpoint:** `/api/auth/login`
 *   **Método:** `POST`
-*   **Descrição:** Autentica Usuário.
+*   **Descrição:** Autenticar Usuário.
 
 **Exemplo de Requisição**
 *   **URL:** `http://localhost:8888/api/auth/login`
@@ -334,3 +375,51 @@ Esta API permite gerenciar despesas.
     }
 }
 ```
+
+## Endpoint de Visualizar Detalhes de despesas
+
+*   **Endpoint:** `/api/expense/{id}`
+*   **Método:** `GET`
+*   **Descrição:** Visualiza detalhes de uma despesa.
+
+**Exemplo de Requisição**
+*   **URL:** `http://localhost:8888/api/expense/5`
+
+**Exemplo de Resposta (200 OK)**
+```json
+{
+    "success": true,
+    "data": {
+        "id": 5,
+        "user_id": 3,
+        "category_id": 1,
+        "description": "Test",
+        "amount": "499.50",
+        "date": "2025-09-10",
+        "created_at": "2025-09-11 01:06:11",
+        "_links": {
+            "self": {
+                "href": "http://localhost:8888/api/expense/5"
+            },
+            "update": {
+                "href": "http://localhost:8888/api/expense/5"
+            },
+            "delete": {
+                "href": "http://localhost:8888/api/expense/5"
+            }
+        }
+    }
+}
+```
+
+## Endpoint de Excluir Despesa
+
+*   **Endpoint:** `/api/expense/{id}`
+*   **Método:** `DELETE`
+*   **Descrição:** Deleta uma despesa.
+
+**Exemplo de Requisição**
+*   **URL:** `http://localhost:8888/api/expense/5`
+
+**Exemplo de Resposta (204 No Content)**
+
