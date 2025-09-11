@@ -9,23 +9,6 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-
-    services:
-      mysql:
-        image: mysql:8.0
-        env:
-          MYSQL_ROOT_PASSWORD: password
-          MYSQL_DATABASE: db_gerencia
-          MYSQL_USER: admin
-          MYSQL_PASSWORD: admin123
-        #ports:
-        #  - 3306:3306
-        options: >-
-          --health-cmd="mysqladmin ping -h localhost"
-          --health-interval=10s
-          --health-timeout=5s
-          --health-retries=3
-
     steps:
       - name: Checkout código
         uses: actions/checkout@v4
@@ -42,6 +25,14 @@ jobs:
       - name: Instalar dependências PHP
         run: docker compose exec -T php composer install --prefer-dist --no-interaction --no-progress
 
+      - name: Aguardar DB
+        run: |
+          for i in {1..30}; do
+            docker compose exec -T db mysqladmin ping -h localhost -uadmin -padmin123 && break
+            echo "Aguardando DB..."
+            sleep 2
+          done
+          
       - name: Rodar migrations
         run: docker compose exec -T php php yii migrate --interactive=0
 
