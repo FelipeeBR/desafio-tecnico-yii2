@@ -1,0 +1,38 @@
+name: Run Codeception Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      - name: Subir containers
+        run: docker compose -f docker-compose.yml up -d
+
+      - name: Aguardar MySQL ficar disponível
+        run: |
+          for i in {1..30}; do
+            if docker compose exec -T db mysqladmin ping -h localhost -u admin -padmin123 --silent; then
+              echo "MySQL está pronto"
+              break
+            fi
+            echo "Aguardando MySQL... ($i/30)"
+            sleep 2
+          done
+
+      - name: Instalar dependências PHP
+        run: docker compose exec -T php composer install --prefer-dist --no-interaction --no-progress
+
+      - name: Rodar migrations
+        run: docker compose exec -T php php yii migrate --interactive=0
+
+      - name: Rodar testes Codeception
+        run: docker compose exec -T php vendor/bin/codecept run api
