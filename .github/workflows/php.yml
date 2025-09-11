@@ -15,7 +15,7 @@ jobs:
         image: mysql:8.0
         env:
           MYSQL_ROOT_PASSWORD: password
-          MYSQL_DATABASE: db_gerencia_test
+          MYSQL_DATABASE: db_gerencia
           MYSQL_USER: admin
           MYSQL_PASSWORD: admin123
         #ports:
@@ -39,7 +39,6 @@ jobs:
       - name: Subir containers
         run: docker compose -f docker-compose.yml up -d php db
 
-      # 👇 Instala dependências dentro do container
       - name: Instalar dependências PHP
         run: docker compose exec -T php composer install --prefer-dist --no-interaction --no-progress
 
