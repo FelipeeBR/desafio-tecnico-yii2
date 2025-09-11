@@ -62,7 +62,7 @@ Esta API permite gerenciar despesas.
 }
 ```
 
-## Endpoint de Autenticação de Usuários
+## Endpoint de Cadastro de Despesas
 
 *   **Endpoint:** `/api/expense`
 *   **Método:** `POST`
@@ -93,6 +93,136 @@ Esta API permite gerenciar despesas.
                 "href": "http://localhost:8888/api/expense/6"
             }
         }
+    }
+}
+```
+
+## Endpoint de Editar de Despesas
+
+*   **Endpoint:** `/api/expense/{id}`
+*   **Método:** `PUT`
+*   **Descrição:** Edita despesa.
+
+**Exemplo de Requisição**
+*   **URL:** `http://localhost:8888/api/expense/6`
+
+**Exemplo de Resposta (200 OK)**
+```json
+{
+    "success": true,
+    "data": {
+        "id": 6,
+        "user_id": 3,
+        "category_id": 1,
+        "description": "Test Atualizado",
+        "amount": 999,
+        "date": "2025-09-10",
+        "created_at": "2025-09-11 01:06:55",
+        "_links": {
+            "self": {
+                "href": "http://localhost:8888/api/expense/6"
+            },
+            "update": {
+                "href": "http://localhost:8888/api/expense/6"
+            },
+            "delete": {
+                "href": "http://localhost:8888/api/expense/6"
+            }
+        }
+    }
+}
+```
+
+## Endpoint de Visualizar Despesas
+
+*   **Endpoint:** `/api/expense`
+*   **Método:** `GET`
+*   **Descrição:** Visualizar Despesas.
+
+**Exemplo de Requisição**
+*   **URL:** `http://localhost:8888/api/expense`
+
+**Exemplo de Resposta (200 OK)**
+```json
+{
+    "items": [
+        {
+            "id": 4,
+            "user_id": 3,
+            "category_id": 1,
+            "description": "Test",
+            "amount": "200.00",
+            "date": "2025-09-10",
+            "created_at": "2025-09-11 01:05:17",
+            "_links": {
+                "self": {
+                    "href": "http://localhost:8888/api/expense/4"
+                },
+                "update": {
+                    "href": "http://localhost:8888/api/expense/4"
+                },
+                "delete": {
+                    "href": "http://localhost:8888/api/expense/4"
+                }
+            }
+        },
+        {
+            "id": 5,
+            "user_id": 3,
+            "category_id": 1,
+            "description": "Test",
+            "amount": "499.50",
+            "date": "2025-09-10",
+            "created_at": "2025-09-11 01:06:11",
+            "_links": {
+                "self": {
+                    "href": "http://localhost:8888/api/expense/5"
+                },
+                "update": {
+                    "href": "http://localhost:8888/api/expense/5"
+                },
+                "delete": {
+                    "href": "http://localhost:8888/api/expense/5"
+                }
+            }
+        },
+        {
+            "id": 6,
+            "user_id": 3,
+            "category_id": 1,
+            "description": "Test Atualizado",
+            "amount": "999.00",
+            "date": "2025-09-10",
+            "created_at": "2025-09-11 01:06:55",
+            "_links": {
+                "self": {
+                    "href": "http://localhost:8888/api/expense/6"
+                },
+                "update": {
+                    "href": "http://localhost:8888/api/expense/6"
+                },
+                "delete": {
+                    "href": "http://localhost:8888/api/expense/6"
+                }
+            }
+        }
+    ],
+    "_links": {
+        "self": {
+            "href": "http://localhost:8888/api/expense?page=1"
+        },
+        "first": {
+            "href": "http://localhost:8888/api/expense?page=1"
+        },
+        "last": {
+            "href": "http://localhost:8888/api/expense?page=1"
+        }
+    },
+    "_meta": {
+        "totalCount": 3,
+        "pageCount": 1,
+        "currentPage": 1,
+        "perPage": 20
     }
 }
 ```
