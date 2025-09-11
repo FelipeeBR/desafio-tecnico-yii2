@@ -16,7 +16,7 @@ actor: ApiTester
 modules:
     enabled:
         - PhpBrowser:
-            url: 'http://localhost:8888/index-test.php/'
+            url: 'http://localhost/index-test.php/'
         - REST:
             depends: PhpBrowser
         - \Helper\Api

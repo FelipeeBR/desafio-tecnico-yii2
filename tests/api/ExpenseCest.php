@@ -145,7 +145,7 @@ class ExpenseCest
         ]);
         
         $I->seeResponseCodeIs(201);
-        $expenseId = $I->grabDataFromResponseByJsonPath('$.expense.id')[0];
+        $expenseId = $I->grabDataFromResponseByJsonPath('$.data.id')[0];
         
         $I->sendPut("/api/expense/{$expenseId}", [
             'category_id' => 2,
@@ -176,7 +176,7 @@ class ExpenseCest
         ]);
         
         $I->seeResponseCodeIs(201);
-        $expenseId = $I->grabDataFromResponseByJsonPath('$.expense.id')[0];
+        $expenseId = $I->grabDataFromResponseByJsonPath('$.data.id')[0];
         
         $I->sendDelete("/api/expense/{$expenseId}");
 

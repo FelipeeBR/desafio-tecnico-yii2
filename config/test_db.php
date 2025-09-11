@@ -1,6 +1,10 @@
 <?php
 $db = require __DIR__ . '/db.php';
-// test database! Important not to run tests on production or development databases
-$db['dsn'] = 'mysql:host=localhost;dbname=db_gerencia';
+return [
+    'class' => 'yii\db\Connection',
+    'dsn' => 'mysql:host=db;dbname=db_gerencia',
+    'username' => 'admin',
+    'password' => 'admin123',
+    'charset' => 'utf8',
+];
 
-return $db;
