@@ -226,3 +226,111 @@ Esta API permite gerenciar despesas.
     }
 }
 ```
+
+## Endpoint de Filtrar Despesas por Categoria
+
+*   **Endpoint:** `/api/expense?category_id={id}`
+*   **Método:** `GET`
+*   **Descrição:** Filtrar Despesas por Categoria.
+
+**Exemplo de Requisição**
+*   **URL:** `http://localhost:8888/api/expense?category_id=2`
+
+**Exemplo de Resposta (200 OK)**
+```json
+{
+    "items": [
+        {
+            "id": 7,
+            "user_id": 3,
+            "category_id": 2,
+            "description": "Test",
+            "amount": "499.50",
+            "date": "2025-09-10",
+            "created_at": "2025-09-11 01:20:53",
+            "_links": {
+                "self": {
+                    "href": "http://localhost:8888/api/expense/7"
+                },
+                "update": {
+                    "href": "http://localhost:8888/api/expense/7"
+                },
+                "delete": {
+                    "href": "http://localhost:8888/api/expense/7"
+                }
+            }
+        }
+    ],
+    "_links": {
+        "self": {
+            "href": "http://localhost:8888/api/expense?category_id=2&page=1"
+        },
+        "first": {
+            "href": "http://localhost:8888/api/expense?category_id=2&page=1"
+        },
+        "last": {
+            "href": "http://localhost:8888/api/expense?category_id=2&page=1"
+        }
+    },
+    "_meta": {
+        "totalCount": 1,
+        "pageCount": 1,
+        "currentPage": 1,
+        "perPage": 20
+    }
+}
+```
+
+## Endpoint de Filtrar Despesas por Mês/Ano e Categoria
+
+*   **Endpoint:** `/api/expense?month=9&year=2025&category_id={id}`
+*   **Método:** `GET`
+*   **Descrição:** Filtrar Despesas por Mês/ano e Categoria.
+
+**Exemplo de Requisição**
+*   **URL:** `http://localhost:8888/api/expense?month=9&year=2025&category_id=2`
+
+**Exemplo de Resposta (200 OK)**
+```json
+{
+    "items": [
+        {
+            "id": 7,
+            "user_id": 3,
+            "category_id": 2,
+            "description": "Test",
+            "amount": "499.50",
+            "date": "2025-09-10",
+            "created_at": "2025-09-11 01:20:53",
+            "_links": {
+                "self": {
+                    "href": "http://localhost:8888/api/expense/7"
+                },
+                "update": {
+                    "href": "http://localhost:8888/api/expense/7"
+                },
+                "delete": {
+                    "href": "http://localhost:8888/api/expense/7"
+                }
+            }
+        }
+    ],
+    "_links": {
+        "self": {
+            "href": "http://localhost:8888/api/expense?month=9&year=2025&category_id=2&page=1"
+        },
+        "first": {
+            "href": "http://localhost:8888/api/expense?month=9&year=2025&category_id=2&page=1"
+        },
+        "last": {
+            "href": "http://localhost:8888/api/expense?month=9&year=2025&category_id=2&page=1"
+        }
+    },
+    "_meta": {
+        "totalCount": 1,
+        "pageCount": 1,
+        "currentPage": 1,
+        "perPage": 20
+    }
+}
+```
