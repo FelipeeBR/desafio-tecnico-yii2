@@ -461,3 +461,100 @@ Esta API permite gerenciar despesas.
 
 **Exemplo de Resposta (204 No Content)**
 
+# Extras
+
+## Endpoint de Filtrar Intervalo de Valores
+
+*   **Endpoint:** `/api/expense?min_amount={amount}&max_amount={amount}`
+*   **Método:** `GET`
+*   **Descrição:** Filtrar Despesas por Mês/ano e Categoria.
+
+**Exemplo de Requisição**
+*   **URL:** `http://localhost:8888/api/expense?min_amount=100&max_amount=500`
+
+**Exemplo de Resposta (200 OK)**
+```json
+{
+    "items": [
+        {
+            "id": 8,
+            "user_id": 5,
+            "category_id": 2,
+            "description": "Test",
+            "amount": "499.50",
+            "date": "2025-09-10",
+            "created_at": "2025-09-11 01:52:24",
+            "_links": {
+                "self": {
+                    "href": "http://localhost:8888/api/expense/8"
+                },
+                "update": {
+                    "href": "http://localhost:8888/api/expense/8"
+                },
+                "delete": {
+                    "href": "http://localhost:8888/api/expense/8"
+                }
+            }
+        },
+        {
+            "id": 9,
+            "user_id": 5,
+            "category_id": 2,
+            "description": "Test",
+            "amount": "200.50",
+            "date": "2025-09-10",
+            "created_at": "2025-09-11 01:52:32",
+            "_links": {
+                "self": {
+                    "href": "http://localhost:8888/api/expense/9"
+                },
+                "update": {
+                    "href": "http://localhost:8888/api/expense/9"
+                },
+                "delete": {
+                    "href": "http://localhost:8888/api/expense/9"
+                }
+            }
+        }
+    ],
+    "_links": {
+        "self": {
+            "href": "http://localhost:8888/api/expense?min_amount=100&max_amount=500&page=1"
+        },
+        "first": {
+            "href": "http://localhost:8888/api/expense?min_amount=100&max_amount=500&page=1"
+        },
+        "last": {
+            "href": "http://localhost:8888/api/expense?min_amount=100&max_amount=500&page=1"
+        }
+    },
+    "_meta": {
+        "totalCount": 2,
+        "pageCount": 1,
+        "currentPage": 1,
+        "perPage": 20
+    }
+}
+```
+
+## Endpoint de Criar Categoria
+
+*   **Endpoint:** `/api/category`
+*   **Método:** `POST`
+*   **Descrição:** Adiciona nova categoria.
+
+**Exemplo de Requisição**
+*   **URL:** `http://localhost:8888/api/category`
+```json
+{
+    "name": "Moradia"
+}
+```
+
+**Exemplo de Resposta (201 Created)**
+```json
+{
+    "name": "Moradia",
+    "id": 4
+}
+```
