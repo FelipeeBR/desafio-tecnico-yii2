@@ -27,11 +27,11 @@ API RESTful utilizando Yii2 para gerenciar despesas pessoais. O sistema permitir
 
 ### Decisões Tecnicas
 #### Separação de responsabilidades:
-- Decisão: Criar classes separadas (User, UserService, UserController, UserIdentityService) para dividir as responsabilidades.
-  - User: Responsável por apenas modelagem e regras da entidade.
-  - UserService: Para regras de negocio (Exemplo: CreateUser)
-  - UserController: Responsável pelos endpoints Restful
-  - UserItentityService: Responsável unicamente pela autenticação do usuario
+- **Decisão**: Criar classes separadas (`User, UserService, UserController, UserIdentityService`) para dividir as responsabilidades.
+  - **User**: Responsável por apenas modelagem e regras da entidade.
+  - **UserService**: Para regras de negocio (Exemplo: `CreateUser`)
+  - **UserController**: Responsável pelos endpoints Restful
+  - **UserIdentityService**: Responsável unicamente pela autenticação do usuario
 
 #### Desabilitar o endpoint padrão de create em UserController:
 ```
@@ -42,12 +42,12 @@ public function actions() {
     return $actions;
 }
 ```
-- Decisão: Foi necessário para implementar uma logica de cadastrar usuario. Em um caso futuro possa surgir novas funcionalidades, como por exemplo,
+- **Decisão**: Foi necessário para implementar uma logica de cadastrar usuario. Em um caso futuro possa surgir novas funcionalidades, como por exemplo,
 o usuario ter um perfil, seria mais facil preencher algumas informações para o perfil do usuario (uma entidade Profile) chamando os serviços de Profile no metodo de criar usuario.
 
 #### Injeção de dependência PasswordHasher:
-- Decisão: Antes para encriptar a senha do usuario, era tratado diretamente na entidade User chamando o método setPassword. Foi tirado essa reponsabilidade da entidade User.
-O User requisita o serviço de encriptar a senha ao inves de fazer esse serviço. No caso o PasswordHasherService vai fazer isso.
+- **Decisão**: Antes para encriptar a senha do usuario, era tratado diretamente na entidade `User` chamando o método setPassword. Foi tirado essa reponsabilidade da entidade User.
+O `User` requisita o serviço de encriptar a senha ao inves de fazer esse serviço. No caso o `PasswordHasherService` vai fazer isso.
 
 #### Desativar CRUD padrão de Despesas (Expense):
 ```
@@ -58,14 +58,14 @@ public function actions() {
   return $actions;
 }
 ```
-- Decisão: Foi desativado a maneira padrão de CRUD de despesas para tratar melhor as validações, como:
-  - ActionIndex: Consegue filtrar as depesas com searchModel, como tambem a maneira do usuario visualizar somente suas despesas.
-  - ActionCreate: Para criar uma despesa precisa do id do usuario autenticado.
-  - ActionUpdate: Para atualizar dados de uma despesa precisa do id do usuario autenticado.
-  - ActionDelete: Só permite deleções de despesas do usuario autenticado.
-  - ActionView: Visualiza detalhes de despesas do usuario autenticado.  
+- **Decisão**: Foi desativado a maneira padrão de CRUD de despesas para tratar melhor as validações, como:
+  - **ActionIndex**: Consegue filtrar as depesas com `searchModel`, como tambem a maneira do usuario visualizar somente suas despesas.
+  - **ActionCreate**: Para criar uma despesa precisa do id do usuario autenticado.
+  - **ActionUpdate**: Para atualizar dados de uma despesa precisa do id do usuario autenticado.
+  - **ActionDelete**: Só permite deleções de despesas do usuario autenticado.
+  - **ActionView**: Visualiza detalhes de despesas do usuario autenticado.  
 
-#### Links:
+#### Suporte HATEOAS retornando Links:
 ```
 public function getLinks(): array {
   return [
@@ -75,11 +75,18 @@ public function getLinks(): array {
   ];
 }
 ```
-- Decisão: Para saber quais ações da entidade User/Expense estão disponiveis (view, update, delete), foi implementado
-o método getLinks() para uma melhor interação com a API, que é um principio de Restful.
+- **Decisão**: Para expor quais endpoints da entidade `User` e `Expense` estão disponiveis (view, update, delete), foi implementado
+o método `getLinks()` para uma melhor interação com a API, que é um principio de RESTFUL.
 
 #### Modulo api
-- Decisão: Tudo que for relacionado a api ficará no modules/api, e com o modulo tras mais facilidade e organização em novas implementações e testes.
+- **Decisão**: Tudo que for relacionado a api ficará no modules/api, e com o modulo tras mais facilidade e organização em novas implementações e testes.
+
+#### Implementação de Categoria
+- **Decisão**: Criei a Entidade `Category` e endpoints para dar ao usuario uma maneira de inserir novas categorias. Por padrão já vem com (`alimentação, transporte, lazer`),
+mas o usuário poderá cadastrar novas categorias que ficaram disponiveis para todos usuarios.
+
+#### Autenticação
+- **Decisão**: Utiliza `HttpBearerAuth` com token de acesso (`access_token`) faz com os endpoints exijam `Authorization: Bearer token` exceto o endpoint de criar usuario.
 
 ### Testes
 
