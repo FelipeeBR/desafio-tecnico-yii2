@@ -39,8 +39,12 @@ jobs:
       - name: Subir containers
         run: docker compose -f docker-compose.yml up -d php db
 
+      # 👇 Instala dependências dentro do container
+      - name: Instalar dependências PHP
+        run: docker compose exec -T php composer install --prefer-dist --no-interaction --no-progress
+
       - name: Rodar migrations
-        run: docker compose exec php php yii migrate --interactive=0
+        run: docker compose exec -T php php yii migrate --interactive=0
 
       - name: Rodar testes Codeception
-        run: docker compose exec php vendor/bin/codecept run
+        run: docker compose exec -T php vendor/bin/codecept run
