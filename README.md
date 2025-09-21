@@ -6,7 +6,7 @@ API RESTful utilizando Yii2 para gerenciar despesas pessoais. O sistema permitir
 
 1. Clone o repositorio
    ```
-   git clone https://github.com/FelipeeBR/desafio-tecnico-yii2
+   git clone https://github.com/felipeemen/desafio-tecnico-yii2
    cd desafio-tecnico-yii2
    ```
 2. Conferir se precisar instalar dependencias:
